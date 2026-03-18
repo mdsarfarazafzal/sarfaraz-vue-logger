@@ -5,7 +5,7 @@ export default {
         "font-size:20px; font-weight:bold; background: #000000; padding: 5px; border-radius: 10px; margin: 5px",
 
       success(msg) {
-        console.log(`%c${msg}`, `color:#27F52E; ${this.logStyle}`);
+        console.log(`%c${msg}`, `color:#F20CDF; ${this.logStyle}`);
       },
       error(msg) {
         console.log(`%c${msg}`, `color:#E50B0B; ${this.logStyle}`);
