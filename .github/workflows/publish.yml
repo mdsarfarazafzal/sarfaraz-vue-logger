@@ -1,0 +1,31 @@
+name: Logger NPM Package Publisher
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish-and-trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Publish to NPM
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Trigger Todo App Update
+        uses: peter-evans/repository-dispatch@v4
+        with:
+          repository: mdsarfarazafzal/todo-app-vue
+          token: ${{ secrets.PAT_TOKEN }}
+          event-type: logger_updated
